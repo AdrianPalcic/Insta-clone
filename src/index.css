@@ -1,0 +1,24 @@
+.pleaseHelp {
+  display:flex;
+  padding:10px;
+  align-items: center;
+  margin-left:5px;
+}
+.pleaseHelp div {
+  margin-left: 14px;
+}
+.margin {
+  margin-top: auto;
+}
+.color {
+  color: #4682B4;
+  transition: 0.2s ease-in-out;
+  font-weight: 600;
+}
+.color:hover {
+  color: white;
+
+}
+.color2 {
+  color: #4682B4;
+}
