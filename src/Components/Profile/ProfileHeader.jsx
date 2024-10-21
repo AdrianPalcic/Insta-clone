@@ -1,7 +1,12 @@
-import { Avatar, AvatarGroup, Flex, VStack, Text, Button } from '@chakra-ui/react'
-import React from 'react'
+import { Avatar, AvatarGroup, Flex, VStack, Text, Button, Spinner } from '@chakra-ui/react'
+import useAuthStore from '../../store/authStore'
+
 
 const ProfileHeader = () => {
+
+    const authUser = useAuthStore((state) => state.user);
+
+    if (!authUser) return <Spinner size={"sm"} />
   return (
     <Flex 
     gap={{base:4, sm:10}}
@@ -15,7 +20,7 @@ const ProfileHeader = () => {
         mx={"auto"}
 
         >
-            <Avatar name='Adrian' src="/profilepic.png" alt="Adrian profilna" />
+            <Avatar name={`${authUser.user}`} src={`${authUser.profilePicURL}`} alt="Profilna" />
         </AvatarGroup>
 
         <VStack 
@@ -31,7 +36,7 @@ const ProfileHeader = () => {
             alignItems={"center"}
             w={"full"}>
                 <Text fontSize={{base:"sm",md:"lg"}}>
-                    Adrian
+                    {authUser.username}
                 </Text>
                 <Flex gap={4} alignItems={"center"} justifyContent={"center"}>
                     <Button 
@@ -53,6 +58,13 @@ const ProfileHeader = () => {
             mb={1}
 
             >
+                {
+                /* Kad budem radio edit profile mogucnost uz to da se dodaju followers 
+                i posts ovo zamjeni sa 
+                    1. {authUser.posts} (array) - that counts the number of that item
+                    2. {authUser.followers} (array) - that counts the number of that item
+                    3. {authUser.following} (array) - that counts the number of that item
+                */}
                 <Text fontSize={{base:"xs",md:"sm"}} textAlign={"center"} >
                     <Text as="span" fontWeight={"bold"} mr={1}>4</Text>
                     Posts
@@ -70,8 +82,9 @@ const ProfileHeader = () => {
             alignItems={"center"}  
             gap={4}
             >
-                <Text fontSize={"sm"} fontWeight={"bold"}>Adrian</Text>
+                <Text fontSize={"sm"} fontWeight={"bold"}>{authUser.username}</Text>
             </Flex>
+                         {/* Ovo zamjeni sa {authUser.bio} kada budem radio edit profile mogucnost */}
             <Text fontSize={"sm"}>Instagram clone aplikacija za vjezbu full stack aplikacija</Text>
         </VStack>
     </Flex>

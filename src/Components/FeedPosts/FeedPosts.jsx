@@ -9,8 +9,8 @@ const FeedPosts = () => {
     useEffect(() => {
         setTimeout(() => {
             setIsLoading(false)
-        }, 1500)
-    }, [])
+        }, 2000)
+    }, []);
   return (
 
    

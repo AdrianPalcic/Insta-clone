@@ -1,7 +1,7 @@
 import { Flex, VStack, Text, Box } from "@chakra-ui/react"
 import SuggestedHeader from "./SuggestedHeader"
 import SuggestedUser from "./SuggestedUser"
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 const SuggestedUsers = () => {
   return (
