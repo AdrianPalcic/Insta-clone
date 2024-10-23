@@ -55,7 +55,6 @@ const useSignUpWithEmailandPassword = () => {
                     following: [],
                     posts: [],
                     createdAt: Date.now()
-
                 }  
                 {/* this saves it in the database */}
         { /* reference the storage service */ }{/* start a collection */}{/* place the id */}

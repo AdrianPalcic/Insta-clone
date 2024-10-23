@@ -27,7 +27,7 @@ const ProfilePosts = () => {
           </Skeleton>
         </VStack>
       ) )}
-        
+        {/* Ovo jos ne znam kako editat */}
       {!isLoading && (
         <>
         <ProfilePost img="/img1.png" />

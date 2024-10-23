@@ -6,7 +6,8 @@ const ProfileHeader = () => {
 
     const authUser = useAuthStore((state) => state.user);
 
-    if (!authUser) return <Spinner size={"sm"} />
+    if (!authUser) return "";
+
   return (
     <Flex 
     gap={{base:4, sm:10}}
@@ -20,7 +21,7 @@ const ProfileHeader = () => {
         mx={"auto"}
 
         >
-            <Avatar name={`${authUser.user}`} src={`${authUser.profilePicURL}`} alt="Profilna" />
+            <Avatar src={`${authUser.profilePicURL}`} alt="Profilna" />
         </AvatarGroup>
 
         <VStack 

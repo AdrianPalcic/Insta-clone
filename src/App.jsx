@@ -22,14 +22,12 @@ function App() {
     }
   }, [user, authUser]);
 
-  if (loading) return <div>Loading...</div>;
-
   return (
     <PageLayout>
       <Routes>
         <Route path="/" element={user ? <HomePage /> : <Navigate to="/auth" />} />
         <Route path="/auth" element={!user ? <AuthPage /> : <Navigate to="/" />} />
-        <Route path="/:username" element={<ProfilePage />} />
+        <Route path="/:username" element={user ? <ProfilePage /> : <Navigate to="/auth" />} />
       </Routes>
     </PageLayout>
   );

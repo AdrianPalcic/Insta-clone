@@ -1,12 +1,16 @@
-import { Avatar, Box, Flex, Tooltip, Text, Button } from "@chakra-ui/react"
+import { Avatar, Box, Flex, Tooltip, Button } from "@chakra-ui/react"
 import { Link, Link as RouterLink} from "react-router-dom"
 import { CreatePostLogo, InstagramLogo, InstagramMobileLogo, NotificationsLogo, SearchLogo } from "../../../assets/Contants"
 import { AiFillHome } from "react-icons/ai"
 import { BiLogOut } from "react-icons/bi"
 import useLogout from "../../../Hooks/useLogout"
+import useAuthStore from "../../../store/authStore"
 
 
 const Sidebar = () => {
+
+    const authUser = useAuthStore(state => state.user);
+
 
         const sidebaritems = [
             {
@@ -27,13 +31,14 @@ const Sidebar = () => {
                 text: "Create",
             },
             {
-                icon: <Avatar size={"sm"}  name="Adrian Palcic" src="/profilepic.png" />,
+                icon: <Avatar size={"sm"}  src={authUser ? `${authUser.profilePicURL}` : "profilePic.png"} />,
                 text: "Profile",
-                link: "/Adrian",
+                link: `Name`,
             },
         ];
 
        const {handleLogout, isLoggingOut, error} = useLogout();
+
 
   return (
     <Box height={"100vh"} 
@@ -53,7 +58,7 @@ const Sidebar = () => {
             </Link>
             </Box>
 
-            <Box display={{ base: "block", md: "none" }} p={4} cursor="pointer" borderRadius={6} _hover={{ bg: "whiteAlpha.200" }} w={10}>
+            <Box display={{ base: "block", md: "none" }} p={4} cursor="pointer" borderRadius={6} _hover={{ bg: "whiteAlpha.200" }} w={"full"}>
             <Link to={"/"} as={RouterLink}>
                 <InstagramMobileLogo />
 </Link>
@@ -76,7 +81,7 @@ const Sidebar = () => {
                 as={RouterLink}
                 alignItems={"center"}
                 gap={6}
-                _hover={{bg: "whiteAlpha.400"}}
+                _hover={{ bg: "whiteAlpha.200" }}
                 p={4}
                 w={{base: 10, md: "full"}}
                 className="pleaseHelp"
@@ -106,13 +111,14 @@ const Sidebar = () => {
            >
             <Flex
                 alignItems={"center"}
-                gap={6}
+                gap={2}
                 _hover={{bg: "whiteAlpha.400"}}
-                p={4}
-                w={{base: 10, md: "full"}}
+                w={"full"}
                 className="pleaseHelp margin"
-                justifyContent={{base:"center", md:"flex-start"}}
+                justifyContent={"flex-start"}
                 onClick={handleLogout}
+                borderRadius={6}
+                cursor={"pointer"}
             >
                 {<BiLogOut size={25} />}
                 <Button display={{base: "none", md: "block"}}

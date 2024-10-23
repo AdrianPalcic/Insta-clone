@@ -2,13 +2,13 @@
   display:flex;
   padding:10px;
   align-items: center;
-  margin-left:5px;
 }
 .pleaseHelp div {
   margin-left: 14px;
 }
 .margin {
   margin-top: auto;
+
 }
 .color {
   color: #4682B4;
@@ -34,4 +34,9 @@
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+@media (max-width: 770px) {
+  .pleaseHelp {
+    padding-left:17px;
+  }
 }
