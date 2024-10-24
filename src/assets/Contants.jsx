@@ -1,3 +1,6 @@
+
+{/* SVG kopirani sa instagram stranice */}
+
 export const InstagramLogo = () => (
 	<svg
 		aria-label='Instagram'

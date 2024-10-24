@@ -31,13 +31,13 @@ const Sidebar = () => {
                 text: "Create",
             },
             {
-                icon: <Avatar size={"sm"}  src={authUser ? `${authUser.profilePicURL}` : "profilePic.png"} />,
+                icon: <Avatar size={"sm"} name={authUser && `${authUser.username}`}  src={authUser ? `${authUser.profilePicURL}` : "profilePic.png"} />,
                 text: "Profile",
-                link: `Name`,
+                link: `${authUser && authUser.username}`,
             },
         ];
 
-       const {handleLogout, isLoggingOut, error} = useLogout();
+       const {handleLogout, isLoggingOut} = useLogout();
 
 
   return (

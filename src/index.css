@@ -2,6 +2,10 @@
   display:flex;
   padding:10px;
   align-items: center;
+  border-radius: 6px;
+}
+.pleaseHelp:hover {
+  background-color: hsl(0, 0%, 20%);
 }
 .pleaseHelp div {
   margin-left: 14px;

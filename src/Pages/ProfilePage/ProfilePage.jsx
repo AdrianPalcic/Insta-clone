@@ -1,10 +1,25 @@
-import { Container, Flex } from "@chakra-ui/react"
+import { Container, Flex, Skeleton, SkeletonCircle, Text, VStack } from "@chakra-ui/react"
 import ProfileHeader from "../../Components/Profile/ProfileHeader"
 import ProfileTabs from "../../Components/Profile/ProfileTabs"
 import ProfilePosts from "../../Components/Profile/ProfilePosts"
+import useGetUserProfileByName from "../../Hooks/useGetUserProfileByName"
+import { useParams } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 const ProfilePage = () => {
-  return (
+
+    const {username} = useParams()
+
+    //Znam da ces se zbunit kad budes ponavljao, znaci userProfile je stavka iz Storea ali ju ovaj hook returna
+    //pa onda mozes je s time importat ne trebas posebno iz storea.
+    //Nema na cemu buduci Ja
+    
+   const {isLoading, userProfile} = useGetUserProfileByName(username)
+
+    const userNotFound = !isLoading && !userProfile;
+    if (userNotFound) return <UserNotFound />
+
+   return (
    <Container maxW="container.lg" py={5}>
     <Flex
     py={10}
@@ -14,7 +29,8 @@ const ProfilePage = () => {
     mx={"auto"}
     flexDirection={"column"}
     >
-       <ProfileHeader />
+       {!isLoading && userProfile && <ProfileHeader />}
+       {isLoading && <ProfileHeaderSkeleton />}
     </Flex>
 
     <Flex
@@ -32,4 +48,44 @@ const ProfilePage = () => {
   )
 }
 
-export default ProfilePage
+export default ProfilePage;
+
+//Skeleton for Profile Header
+const ProfileHeaderSkeleton = () => {
+    return (
+        <Flex
+        gap={{base: 4, sm: 10}}
+        py={10}
+        direction={{base: "column", sm: "row"}}
+        justifyContent={"center"}
+        alignItems={"center"}
+        >
+            <SkeletonCircle size="24" />
+
+            <VStack
+            alignItems={{base: "center", sm: "flex-start"}}
+            gap={2}
+            mx={"auto"}
+            flex={1}
+            >
+                <Skeleton height="12px" width="150px" />
+                <Skeleton height="12px" width="100px" />
+            </VStack>
+        </Flex>
+    )
+}
+
+
+
+const UserNotFound = () => {
+    return (
+        <Flex flexDir={"column"} textAlign={"center"} mx={"auto"}>
+            <Text fontSize={"2x1"}>
+                User not Found
+            </Text>
+            <Link to={"/"} color={"blue.500"} w={"max-content"} mx={"auto"}>
+                Go Home
+            </Link>
+        </Flex>
+    )
+}

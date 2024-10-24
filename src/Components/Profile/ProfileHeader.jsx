@@ -1,13 +1,16 @@
-import { Avatar, AvatarGroup, Flex, VStack, Text, Button, Spinner } from '@chakra-ui/react'
-import useAuthStore from '../../store/authStore'
+import { Avatar, AvatarGroup, Flex, VStack, Text, Button, useDisclosure} from '@chakra-ui/react'
+import useUserProfileStore from '../../store/userProfileStore';
+import useAuthStore from '../../store/authStore';
+import EditProfile from './editProfile';
 
 
 const ProfileHeader = () => {
-
+    const {userProfile} = useUserProfileStore();
     const authUser = useAuthStore((state) => state.user);
+    const { isOpen, onOpen, onClose } = useDisclosure();
 
-    if (!authUser) return "";
-
+    const isProfileYours = authUser && authUser.username === userProfile.username;
+    const visitingAnotherProfile = authUser && authUser.username !== userProfile.username;
   return (
     <Flex 
     gap={{base:4, sm:10}}
@@ -21,7 +24,7 @@ const ProfileHeader = () => {
         mx={"auto"}
 
         >
-            <Avatar src={`${authUser.profilePicURL}`} alt="Profilna" />
+            <Avatar src={userProfile.profilePicURL} alt="Profilna" />
         </AvatarGroup>
 
         <VStack 
@@ -37,20 +40,38 @@ const ProfileHeader = () => {
             alignItems={"center"}
             w={"full"}>
                 <Text fontSize={{base:"sm",md:"lg"}}>
-                    {authUser.username}
+                    {userProfile.username}
                 </Text>
-                <Flex gap={4} alignItems={"center"} justifyContent={"center"}>
-                    <Button 
-                    bg={"white"}
-                    color={"black"}
-                    _hover={{
-                        bg:"whiteAlpha.800"
-                    }}
-                    size={{base:"xs", md:"sm"}}
-                    >
-                        Edit Profile
-                    </Button>
-                </Flex>
+                {isProfileYours && 
+                  <Flex gap={4} alignItems={"center"} justifyContent={"center"}>
+                  <Button 
+                  bg={"white"}
+                  color={"black"}
+                  _hover={{
+                      bg:"whiteAlpha.800"
+                  }}
+                  size={{base:"xs", md:"sm"}}
+                  onClick={onOpen}
+                  >
+                      Edit Profile
+                  </Button>
+              </Flex>
+                }
+                  {visitingAnotherProfile && 
+                  <Flex gap={4} alignItems={"center"} justifyContent={"center"}>
+                  <Button 
+                  bg={"blue.500"}
+                  color={"white"}
+                  _hover={{
+                      bg:"blue.600"
+                  }}
+                  size={{base:"xs", md:"sm"}}
+                  >
+                      Follow
+                  </Button>
+              </Flex>
+                }
+              
             </Flex>
 
             <Flex
@@ -59,23 +80,17 @@ const ProfileHeader = () => {
             mb={1}
 
             >
-                {
-                /* Kad budem radio edit profile mogucnost uz to da se dodaju followers 
-                i posts ovo zamjeni sa 
-                    1. {authUser.posts} (array) - that counts the number of that item
-                    2. {authUser.followers} (array) - that counts the number of that item
-                    3. {authUser.following} (array) - that counts the number of that item
-                */}
+
                 <Text fontSize={{base:"xs",md:"sm"}} textAlign={"center"} >
-                    <Text as="span" fontWeight={"bold"} mr={1}>4</Text>
+                    <Text as="span" fontWeight={"bold"} mr={1}>{userProfile.posts.length}</Text>
                     Posts
                 </Text>
                 <Text fontSize={{base:"xs",md:"sm"}}>
-                    <Text as="span" fontWeight={"bold"} mr={1}>420</Text>
+                    <Text as="span" fontWeight={"bold"} mr={1}>{userProfile.followers.length}</Text>
                     Followers
                 </Text>
                 <Text fontSize={{base:"xs",md:"sm"}}>
-                    <Text as="span" fontWeight={"bold"} mr={1}>69</Text>
+                    <Text as="span" fontWeight={"bold"} mr={1}>{userProfile.following.length}</Text>
                     Following
                 </Text>
             </Flex>
@@ -83,11 +98,11 @@ const ProfileHeader = () => {
             alignItems={"center"}  
             gap={4}
             >
-                <Text fontSize={"sm"} fontWeight={"bold"}>{authUser.username}</Text>
+                <Text fontSize={"sm"} fontWeight={"bold"}>{userProfile.fullName}</Text>
             </Flex>
-                         {/* Ovo zamjeni sa {authUser.bio} kada budem radio edit profile mogucnost */}
-            <Text fontSize={"sm"}>Instagram clone aplikacija za vjezbu full stack aplikacija</Text>
+            <Text fontSize={"sm"}>{userProfile.bio}</Text>
         </VStack>
+        {isOpen && <EditProfile isOpen={isOpen} onClose={onClose} /> }
     </Flex>
   )
 }

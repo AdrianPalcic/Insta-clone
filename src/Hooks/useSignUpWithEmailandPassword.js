@@ -24,7 +24,7 @@ const useSignUpWithEmailandPassword = () => {
         }
                             {/* baza podataka   kolekcija */}
         const usersRef = collection(firestore, "users");
-
+                {/* Query preko koje izvlacimo podatke */}
         const q = query(usersRef, where("username", "==", inputs.username));
         const querySnapshot = await getDocs(q);
 
