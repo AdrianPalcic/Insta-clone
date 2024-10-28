@@ -7,6 +7,12 @@ const useUserProfileStore = create((set) => ({
     addPost:(post) => set(state => ({
                             //Ubiti ono spreada postove usera i dodaje jos jedan id u post
         userProfile: {...state.userProfile, posts: [post.id, ...state.userProfile.posts]}
+    })),
+    deletePost: (id) => set((state) => ({
+        userProfile: {
+            ...state.userProfile,
+            posts: state.userProfile.posts.filter((post) => post.id !== id)
+        }
     }))
 }))
 
