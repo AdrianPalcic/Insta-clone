@@ -35,7 +35,7 @@ const useSignUpWithEmailandPassword = () => {
 
         try {
             {/* user created through the authentication service */}
-            {/* createUserWithEmailAndPassword funckija ce dozvolit da se stvori novi acc na isto ime. Tako da moramo manualno to napravit */}
+            {/* createUserWithEmailAndPassword funckija ce dozvolit da se stvori novi acc na isto ime. Tako da moramo manualno to napravit. RIJEŠENJE IZNAD!! */}
             const newUser = await createUserWithEmailAndPassword(inputs.email,inputs.password);
             if (!newUser && error) {
                 showToast("Error", "Failed to create user", "error")

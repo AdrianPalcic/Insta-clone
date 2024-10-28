@@ -20,7 +20,7 @@ const usePreviewImage = () => {
             }
 
             const reader = new FileReader();
-            reader.onLoadend = () => {
+            reader.onloadend = () => {
                 setSelectedFile(reader.result);
             }
 

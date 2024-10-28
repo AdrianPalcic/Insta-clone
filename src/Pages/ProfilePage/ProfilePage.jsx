@@ -13,7 +13,7 @@ const ProfilePage = () => {
     //Znam da ces se zbunit kad budes ponavljao, znaci userProfile je stavka iz Storea ali ju ovaj hook returna
     //pa onda mozes je s time importat ne trebas posebno iz storea.
     //Nema na cemu buduci Ja
-    
+
    const {isLoading, userProfile} = useGetUserProfileByName(username)
 
     const userNotFound = !isLoading && !userProfile;
@@ -76,7 +76,7 @@ const ProfileHeaderSkeleton = () => {
 }
 
 
-
+ // UREDI OVO PRIJE KRAJA DANA
 const UserNotFound = () => {
     return (
         <Flex flexDir={"column"} textAlign={"center"} mx={"auto"}>

@@ -52,6 +52,7 @@ const EditProfile = ({ isOpen, onClose }) => {
     const handleEditProfile = async() => {
         try {
             await editProfile(inputs, selectedFile);
+            //Reset the selectedFile?
             setSelectedFile(null);
             onClose();
         } catch (error) {
