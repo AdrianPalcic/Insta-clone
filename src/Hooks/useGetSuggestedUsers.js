@@ -23,14 +23,14 @@ const useGetSuggestedUsers = () => {
                     limit(5)
                 );
 
-        const querySnapshot = await getDocs(q);
-        const users = [];
+                const querySnapshot = await getDocs(q);
+                const users = [];
 
-        querySnapshot.forEach((doc) => {
-            users.push({...doc.data(), id: doc.id})
-        });
+                querySnapshot.forEach((doc) => {
+                    users.push({ ...doc.data(), id: doc.id })
+                });
 
-        setSuggestedUsers(users);
+                setSuggestedUsers(users);
 
             } catch (error) {
                 showToast("Error", error.message, "error")
@@ -39,10 +39,10 @@ const useGetSuggestedUsers = () => {
             }
         }
 
-        if(authUser) fetchSuggestedUsers();
-    },[authUser, showToast])
+        if (authUser) fetchSuggestedUsers();
+    }, [authUser, showToast])
 
-    return {isLoading, suggestedUsers}
+    return { isLoading, suggestedUsers }
 }
 
 export default useGetSuggestedUsers

@@ -9,13 +9,13 @@ const useGetUserPosts = () => {
 
     const showToast = useShowToast();
     const [isLoading, setIsLoading] = useState(true);
-    const {posts, setPosts} = usePostStore();
+    const { posts, setPosts } = usePostStore();
     const userProfile = useUserProfileStore(state => state.userProfile);
 
     useEffect(() => {
 
-        const getPosts = async() => {
-            if(!userProfile) return
+        const getPosts = async () => {
+            if (!userProfile) return
             setIsLoading(true);
             setPosts([]);
 
@@ -26,7 +26,7 @@ const useGetUserPosts = () => {
 
                 const post = [];
                 querySnapshot.forEach((doc) => {
-                    post.push({...doc.data(), id: doc.id})
+                    post.push({ ...doc.data(), id: doc.id })
                 });
 
                 //Sort by latest post (latest on top)
@@ -44,9 +44,9 @@ const useGetUserPosts = () => {
             }
         }
         getPosts();
-    }, [setPosts, userProfile, showToast])
+    }, [setPosts, userProfile, showToast]);
 
-    return {isLoading, posts}
+    return { isLoading, posts }
 
 }
 export default useGetUserPosts;
