@@ -1,8 +1,8 @@
 import { Avatar, AvatarGroup, Flex, VStack, Text, Button, useDisclosure } from '@chakra-ui/react'
 import useUserProfileStore from '../../store/userProfileStore';
 import useAuthStore from '../../store/authStore';
-import EditProfile from './editProfile';
 import useFollowUser from '../../Hooks/useFollowUser';
+import EditProfile from './EditProfile';
 
 
 const ProfileHeader = () => {
